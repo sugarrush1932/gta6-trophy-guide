@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Got a Price! — GTA VI Trophy Guide &amp; Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+  <svg class="palms" viewBox="0 0 1280 150" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <g stroke="#0a0720" fill="none" stroke-linecap="round">
+      <path d="M64 150 C62 112 68 82 84 54" stroke-width="9"/>
+      <path d="M84 54 C64 40 44 38 24 46" stroke-width="6"/>
+      <path d="M84 54 C70 34 54 24 34 20" stroke-width="6"/>
+      <path d="M84 54 C82 32 74 16 60 4" stroke-width="6"/>
+      <path d="M84 54 C96 34 110 24 130 20" stroke-width="6"/>
+      <path d="M84 54 C104 44 122 44 140 52" stroke-width="6"/>
+      <path d="M1216 150 C1218 108 1212 76 1196 46" stroke-width="9"/>
+      <path d="M1196 46 C1176 32 1156 30 1136 38" stroke-width="6"/>
+      <path d="M1196 46 C1182 26 1166 16 1146 12" stroke-width="6"/>
+      <path d="M1196 46 C1194 24 1186 8 1172 -4" stroke-width="6"/>
+      <path d="M1196 46 C1208 26 1222 16 1242 12" stroke-width="6"/>
+      <path d="M1196 46 C1216 36 1234 36 1252 44" stroke-width="6"/>
+    </g>
+    <circle cx="640" cy="130" r="34" fill="#ff9a3d" opacity="0.85"/>
+  </svg>
+  <div class="hero-in">
+    <div class="hero-text">
+      <p class="kicker">GRAND THEFT AUTO VI · PLAYSTATION 5 · TROPHY GUIDE &amp; TRACKER</p>
+      <h1>VICE GOT A <span>PRICE!</span></h1>
+      <p class="sub">The Leonida platinum companion: all 55 official trophies with a cited guide to each, a seven-stage roadmap to the platinum, the one confirmed missable flagged in red, and a tracker that saves your progress in this browser.</p>
+      <div class="hero-actions">
+        <button id="exportBtn" type="button">Export progress</button>
+        <label class="file-btn">Import progress <input id="importFile" type="file" accept="application/json"></label>
+        <button id="resetBtn" type="button" class="ghost">Reset</button>
+        <label class="switch"><input id="spoilerToggle" type="checkbox" checked> <span>Spoiler shield: hide hidden trophies until earned</span></label>
+      </div>
+    </div>
+    <div class="hero-progress">
+      <div class="ring" id="ring"><span id="ringPct">0%</span></div>
+      <p class="ring-label" id="progressLabel">0 of 55 earned</p>
+      <p class="grade-counts" id="gradeCounts"></p>
+    </div>
+  </div>
+</header>
+
+<section class="stats" id="statStrip" aria-label="The list at a glance"></section>
+
+<nav class="tabs" aria-label="Views">
+  <button type="button" data-view="tracker" class="tab active">Tracker &amp; guides</button>
+  <button type="button" data-view="roadmap" class="tab">Platinum roadmap</button>
+  <button type="button" data-view="missables" class="tab">Missables &amp; warnings</button>
+  <button type="button" data-view="sources" class="tab">Sources &amp; method</button>
+</nav>
+
+<main>
+  <section id="view-tracker" class="view">
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Search trophies, missions, activities…" aria-label="Search trophies">
+      <div class="chips" id="kindChips" role="group" aria-label="Filter by kind"></div>
+      <label class="sel">Grade
+        <select id="gradeFilter">
+          <option value="all">All grades</option>
+          <option value="platinum">Platinum</option>
+          <option value="gold">Gold</option>
+          <option value="silver">Silver</option>
+          <option value="bronze">Bronze</option>
+        </select>
+      </label>
+      <label class="sel">Sort
+        <select id="sortBy">
+          <option value="roadmap">Roadmap order</option>
+          <option value="rarity">Rarest first</option>
+          <option value="grade">Grade</option>
+          <option value="name">Name A–Z</option>
+        </select>
+      </label>
+    </div>
+    <div class="stage-strip" id="stageStrip"></div>
+    <div class="tracker-grid">
+      <div class="list" id="trophyList"></div>
+      <aside class="detail" id="detailPanel" aria-live="polite"></aside>
+    </div>
+  </section>
+
+  <section id="view-roadmap" class="view" hidden>
+    <h2 class="view-title">The road to Leonida Legend</h2>
+    <p class="view-lede">Seven stages, in the order this companion recommends playing them. The story first, with the save discipline that protects the one confirmed missable; the sweeps afterwards, region by region, so no count becomes a single end-game slog.</p>
+    <div id="roadmapList"></div>
+  </section>
+
+  <section id="view-missables" class="view" hidden>
+    <h2 class="view-title">Missables &amp; warnings</h2>
+    <p class="view-lede">One trophy is confirmed missable at launch. Three more carry a caution: their methods are unconfirmed or one-chance, and this game has no mission replay — so the real protection is a manual save at the start of every chapter.</p>
+    <div id="missableList"></div>
+    <div class="warn-cards">
+      <article class="warn-card">
+        <h3>🗂️ The chapter-save rule</h3>
+        <p>There is no mission replay and no New Game Plus (reported by Output Lag and the Vice City Hub). Keep a manual save at the start of every chapter and one before the final mission. Any one-chance feat that goes wrong is then a reload, not a restart.</p>
+      </article>
+      <article class="warn-card">
+        <h3>🚫 Never cheat on this save</h3>
+        <p>Turning on a cheat reportedly disables trophies for the session and blocks saving (PowerPyx, reported by PlanetGTA6 and others). If you want to play with cheats, do it on a separate save file.</p>
+      </article>
+      <article class="warn-card">
+        <h3>⏱️ Honest uncertainty</h3>
+        <p>The game launched on 19 November 2026. Where a method is still unconfirmed, the guide says so and names the source that lists it as unconfirmed, instead of inventing steps. This page will only ever claim what its sources support.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="view-sources" class="view" hidden>
+    <h2 class="view-title">Sources &amp; method</h2>
+    <p class="view-lede">Names, descriptions and grades are the official PlayStation list, shown exactly as published. Every guide is written for this companion in our own words; nothing is copied from another guide. Beside each trophy, its guide names the sources its facts rest on. The set:</p>
+    <div id="sourceList"></div>
+    <article class="method-card">
+      <h3>How to read the rarity badges</h3>
+      <p id="ratesNote"></p>
+      <h3>How the roadmap was built</h3>
+      <p>The roadmap and the missable flags are built from the official descriptions themselves — which chapters and missions they name, which collectibles and counts they carry (250 stunts, 42 range challenges, 14 drone-race locations, 18 meditation spots, 52 areas, 9 gangs, 8 garages, 500 choices) — ordered so that unlocks arrive before the trophies that need them: partner trophies after Chapter 2, robberies across Chapters 3–4, everything swept before the 100% push.</p>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <p>An unofficial fan companion. Not affiliated with Rockstar Games or PlayStation. Trophy names and descriptions © their respective owners, shown as published. Guide text is original to this companion and cites its sources.</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
